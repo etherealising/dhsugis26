@@ -19,17 +19,32 @@ section {
   display: flex;
 }
 
-container {
-  display: flex;
+article {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  padding: 10 px
   background-color: #ffd2e8;
 }
 
-container div {
-  background-color: #ffeff8;
-  margin: 10px;
+nav {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 20 px
+  background-color: #EDAFCF;
+}
+
+nav ul {
+  list-style-type: circle;
+  padding: 1;
+}
+
+footer {
+  background-color: #f7f9ff;
   padding: 10px;
-  text-align: center
-  font-size: 24px;
+  text-align: center;
+  color: #404040;
 }
 </style>
 </head>
@@ -39,15 +54,25 @@ container div {
 <h1><sub>laura</sub> Veebilehekülg.</h1>
 </header>
 
-<div class="container">
-  <div><a href="https://www.tlu.ee/">TLÜ</a></div>
-  <div><img src="https://i.pinimg.com/736x/28/90/5f/28905f52767ddcfdcc9603891efaa38f.jpg" width="60" height="60"></div>
-  <div><a href="https://www.tlu.ee/">TLÜ</a></div>
-  <div><img src="https://i.pinimg.com/1200x/5d/c4/ad/5dc4ad45c1f9802f9918a4d7bd507eb9.jpg" width="60" height="60"></div>
-  <div><a href="https://www.tlu.ee/">TLÜ</a></div>
-</div>
+<section>
+  <nav>
+    <ul>
+      <li><a href="#">One</a></li>
+      <li><a href="#">Two</a></li>
+      <li><a href="#">Three</a></li>
+    </ul>
+  </nav>
 
-<p>The quick brown fox jumps over the lazy dog.</p>
+  <article>
+    <h1>The quick brown fox</h1>
+    <p>The quick brown fox jumped over the lazy dog.</p>
+    <p>The lazy white dog was jumped over by a quick fox.</p>
+    </article>
+</section>
+
+<footer>
+  <p>Footer</p>
+</footer>
   
 </body>
 </html>
