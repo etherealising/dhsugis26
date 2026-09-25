@@ -1,0 +1,8 @@
+function doGet(){
+    let leht=SpreadsheetApp.openById("1JMl-aJRpDeUNGi7BNrhzk3pcy_Leki-SAxqimCKRTYM").getSheets()[0];
+    return ContentService.createTextOutput(
+      JSON.stringify(leht.getDataRange().getValues())).setMimeType(ContentService.MimeType.JSON);
+}
+
+// https://script.google.com/macros/s/AKfycbxuoPxh3nNgSne3nOmJRk_L2wCQUFBk_ZeiOosIhMZ_sMI85zYgUI23vcezLAgPSE7g/exec
+// Käivitada Driveis.
