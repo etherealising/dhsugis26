@@ -12,18 +12,6 @@
  <script>
    var kaart;
    var hypik;
-   async function otsiKoht(){
-	    let kohanimi=document.getElementById("kast1").value;
-	    const aadress="https://api.opencagedata.com/geocode/v1/json?q="+kohanimi+"&key=0aac443c07914e3ca194a63f185bfda0&language=en&pretty=1"
-	    const response=await fetch(aadress);
-		const obj=await response.json();
-		const asukoht=obj.results[0].geometry;
-		const piirkond=obj.results[0].bounds;
-		L.marker([asukoht.lat, asukoht.lng]).addTo(kaart);
-		L.rectangle([[piirkond.northeast.lat, piirkond.northeast.lng], 
-		  [piirkond.southwest.lat, piirkond.southwest.lng]], 
-		   {color: "#55FF55", weight: 3}).addTo(kaart);
-  }
    function algus(){
     kaart = L.map('kaardikiht').setView([59.439, 24.773], 12);
       new L.TileLayer('https://tiles.maaamet.ee/tm/tms/1.0.0/hybriid@GMC/{z}/{x}/{y}.png&ASUTUS=TLU&ERIALA=DIGIHUMANITAARIA', {
@@ -36,11 +24,11 @@
 	   hypik=L.popup(); 
 	   kaart.on("click", vajutus);
   }
-    function vajutus(e){
+  function vajutus(e){
 	hypik.setLatLng(e.latlng).
 	setContent("Vajutasid "+e.latlng.toString()).openOn(kaart);
   }
-    function kuva(kohad){
+  function kuva(kohad){
 	console.log(kohad);
 	for(let koht of kohad){
 	  L.marker([koht[0], koht[1]]).addTo(kaart);
@@ -49,8 +37,6 @@
   </script>
  </head>  
  <body onload="algus()">
-    <input type="button" value="Otsi" onclick="otsiKoht()" />
-	<input type="text" id="kast1" value="Kuusalu" />
-    <div id="kaardikiht" style="width:400px; height: 300px"></div>
+  <div id="kaardikiht"></div>
  </body>
 </html>
