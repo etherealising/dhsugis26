@@ -20,7 +20,13 @@
     }).addTo(kaart);
 	  fetch("https://script.google.com/macros/s/AKfycbxLC5Xs8m2fFP8cQ1PmWbQHNTOLj3YdKu-hEdt4qyNlgflAWknQCsSgI6TULgt6MMTRbw/exec"
 		    ).then(d => d.json()).then(kuva);
-	   console.log("tellitud");
+	   console.log("tellitud");   	
+	   hypik=L.popup(); 
+	   kaart.on("click", vajutus);
+  }
+  function vajutus(e){
+	hypik.setLatLng(e.latlng).
+	setContent("Vajutasid "+e.latlng.toString()).openOn(kaart);
   }
   function kuva(kohad){
 	console.log(kohad);
@@ -28,6 +34,7 @@
 	  L.marker([koht[0], koht[1]]).addTo(kaart);
 	}
   }
+
 
   </script>
  </head>  
