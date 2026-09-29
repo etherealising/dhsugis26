@@ -21,7 +21,7 @@
 	  fetch("https://script.google.com/macros/s/AKfycbxLC5Xs8m2fFP8cQ1PmWbQHNTOLj3YdKu-hEdt4qyNlgflAWknQCsSgI6TULgt6MMTRbw/exec"
 		    ).then(d => d.json()).then(kuva);
 	   console.log("tellitud");   	
-	   hypik=L.popup(); 
+	   hypik = L.popup(); 
 	   kaart.on("click", vajutus);
   }
   function vajutus(e){
@@ -30,13 +30,32 @@
   }
   function kuva(kohad){
 	console.log(kohad);
-	for(let koht of kohad){
-	  L.marker([koht[0], koht[1]]).addTo(kaart);
-	}
+	  let kogupikkus = 0;
+	  for(let koht of kohad){
+	    L.marker([koht[0], koht[1]]).addTo(kaart);
+  }
+	    L.polyline(kohad, {color: "blue"}).addTo(kaart);
+	  for(let i=0; i<kohad.length-1; i++){
+		  let punkt1 = L.latLng(kohad[i][0], kohad[i][1]);
+		  let punkt2 = L.latLng(kohad[i+1][0], kohad[i+1][1]);
+          let kaugus = punkt1.distanceTo(punkt2) / 1000;
+          kogupikkus += kaugus;
+          console.log(kaugus);
+  }
+      let tekst = "";
+      for(let i=0; i<kohad.length-1; i++){
+          let punkt1 = L.latLng(kohad[i][0], kohad[i][1]);
+          let punkt2 = L.latLng(kohad[i+1][0], kohad[i+1][1]);
+          let kaugus = punkt1.distanceTo(punkt2)/1000;
+          tekst += kaugus.toFixed(1)+" km<br>";
+  }
+    tekst += "kokku: "+kogupikkus.toFixed(1)+" km";
+    document.getElementById("kaugused").innerHTML = tekst;
   }
   </script>
  </head>  
  <body onload="algus()">
   <div id="kaardikiht"></div>
+  <div id="kaugused"></div>
  </body>
 </html>
