@@ -29,29 +29,38 @@
 	setContent("Vajutasid "+e.latlng.toString()).openOn(kaart);
   }
   function kuva(kohad){
-	console.log(kohad);
-	  let kogupikkus = 0;
-	  for(let koht of kohad){
-	    L.marker([koht[0], koht[1]]).addTo(kaart);
-  }
-	    L.polyline(kohad, {color: "blue"}).addTo(kaart);
-	  for(let i=0; i<kohad.length-1; i++){
-		  let punkt1 = L.latLng(kohad[i][0], kohad[i][1]);
-		  let punkt2 = L.latLng(kohad[i+1][0], kohad[i+1][1]);
-          let kaugus = punkt1.distanceTo(punkt2) / 1000;
-          kogupikkus += kaugus;
-          console.log(kaugus);
-  }
-      let tekst = "";
-      for(let i=0; i<kohad.length-1; i++){
-          let punkt1 = L.latLng(kohad[i][0], kohad[i][1]);
-          let punkt2 = L.latLng(kohad[i+1][0], kohad[i+1][1]);
-          let kaugus = punkt1.distanceTo(punkt2)/1000;
-          tekst += kaugus.toFixed(1)+" km<br>";
-  }
-    tekst += "kokku: "+kogupikkus.toFixed(1)+" km";
+    console.log(kohad);
+    let kogupikkus = 0;
+    let punktid = [];
+    for(let koht of kohad){
+        let lat = Number(koht[0]);
+        let lng = Number(koht[1]);
+        punktid.push([lat, lng]);
+        L.marker([lat, lng]).addTo(kaart);
+    }
+    let joon = L.polyline(punktid, {
+        color: "blue",
+        weight: 4
+    }).addTo(kaart);
+    let tekst = "";
+    for(let i = 0; i < punktid.length - 1; i++){
+        let punkt1 = L.latLng(
+            punktid[i][0],
+            punktid[i][1]
+        );
+        let punkt2 = L.latLng(
+            punktid[i+1][0],
+            punktid[i+1][1]
+        );
+        let kaugus = punkt1.distanceTo(punkt2) / 1000;
+        kogupikkus += kaugus;
+        tekst += kaugus.toFixed(1) + " km<br>";
+        console.log("Kaugus:", kaugus);
+    }
+    tekst += "kokku: " + kogupikkus.toFixed(1) + " km";
     document.getElementById("kaugused").innerHTML = tekst;
-  }
+    kaart.fitBounds(joon.getBounds());
+}
   </script>
  </head>  
  <body onload="algus()">
