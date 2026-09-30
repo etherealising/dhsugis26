@@ -25,7 +25,8 @@
    function vajutus(e){
 	     hypik.setLatLng(e.latlng).
 		 setContent("Vajutasid "+e.latlng.toString()).openOn(kaart);
-	     fetch("https://script.google.com/macros/s/AKfycbzMZ9A5hh3fyzrKXu95SFCsGkKrwHKDltk3N-3qByXQgEzB55R8L6Qx-H27z7dylS2JGw/exec?laiuskraad=43.5&pikkuskraad=26.2")
+	   	 let lisand="laiuskraad="+e.latlng.lat+"&pikkuskraad="+e.latlng.lng;
+	     fetch("https://script.google.com/macros/s/AKfycbzMZ9A5hh3fyzrKXu95SFCsGkKrwHKDltk3N-3qByXQgEzB55R8L6Qx-H27z7dylS2JGw/exec?"+lisand)
    }
 
   </script>
