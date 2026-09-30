@@ -60,7 +60,7 @@
         tekst += kaugus.toFixed(1)+" km<br>";
         console.log("Kaugus:", kaugus);
     }
-    tekst += "kokku: " + kogupikkus.toFixed(1) + " km";
+    tekst += "kokku: "+kogupikkus.toFixed(1)+" km";
     document.getElementById("kaugused").innerHTML = tekst;
     kaart.fitBounds(joon.getBounds());
 }
