@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+     <script>
+        function kysi(){
+           let lause=`
+              SELECT ?kool ?koolLabel (COUNT(*) as ?kogus) {
+                ?isik wdt:P27 wd:${riik.value}.
+                ?isik wdt:P106 wd:${amet.value}.
+                ?isik wdt:P69 ?kool.
+                SERVICE wikibase:label {
+                  bd:serviceParam wikibase:language "et,en".
+                } 
+              
+              } GROUP BY ?kool ?koolLabel
+               ORDER BY DESC(?kogus)
+
+              LIMIT 10
+           `;
+           let aadress="https://query.wikidata.org/sparql?format=json&query="+encodeURI(lause);  
+           vastus.innerHTML="ootan vastust";
+           fetch(aadress).then(d => d.json()).then(kuva);
+        }
+
+       
+        function kuva(d){
+           console.log(d);
+           vastus.innerHTML="";
+           for(let rida of d["results"]["bindings"]){
+              console.log(rida["koolLabel"]["value"]);
+              let lause=document.createElement("li");
+              lause.textContent=rida["itemLabel"]["value"];
+              vastus.appendChild(lause);
+           }
+        }
+     </script>
+  </head>
+  <body>
+    <select id="riik" onchange="kysi()">
+           <option value="Q33">Soome</option>
+           <option value="Q191">Eesti</option>
+           <option value="Q34">Rootsi</option>
+           <option value="Q29">Hispaania</option>
+           <option value="Q30">USA</option>
+           <option value="Q884">Lõuna-Korea</option>
+         </select>
+         <select id="amet" onchange="kysi()">
+           <option value="Q82955">poliitik</option>
+           <option value="Q1930187">ajakirjanik</option>
+           <option value="Q193391">diplomaat</option>
+           <option value="Q212980">psühholoog</option>
+           <option value="Q1227197">sotsiaalpedagoog</option>
+           <option value="Q201788">ajaloolane</option>
+         </select>
+         <input type="button" value="otsi" onclick="kysi()" />
+         <ul id="vastus"></ul>
+      </body>
+    </html>
