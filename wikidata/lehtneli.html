@@ -34,7 +34,7 @@
      </script>
   </head>
   <body>
-     <select id="riik">
+     <select id="riik" onchange="kysi() ">
        <option value="Q33">Soome</option>
        <option value="Q191">Eesti</option>
        <option value="Q34">Rootsi</option>
@@ -42,7 +42,13 @@
        <option value="Q30">USA</option>
        <option value="Q884">Lõuna-Korea</option>
      </select>
-     <select id="amet">
+     <select id="amet" onchange="kysi() ">
+       <option value="Q82955">poliitik</option>
+       <option value="Q1930187">ajakirjanik</option>
+       <option value="Q193391">diplomaat</option>
+       <option value="Q212980">psühholoog</option>
+       <option value="Q1227197">sotsiaalpedagoog</option>
+       <option value="Q329737">lihunik</option>
      </select>
      <input type="button" value="otsi" onclick="kysi()" />
      <ul id="vastus"></ul>
