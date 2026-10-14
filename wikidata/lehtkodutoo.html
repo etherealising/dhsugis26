@@ -2,24 +2,29 @@
 <html>
   <head>
      <script>
-        function kysi(kategooria = "male"){
-           let sugu = kategooria === "male"
-        ? "wd:Q6581097"
-        : "wd:Q6581072";
-
-           let lause = `SELECT ?artistLabel WHERE {
+        function kysi(kategooria) {
+    let lause = `
+        SELECT ?artistLabel WHERE {
             ?artist wdt:P136 wd:Q213424.
-
-            ${kategooria === "solo"
-                ? "?artist wdt:P31 wd:Q5."
-                : `?artist wdt:P527 ?member.
-                   ?member wdt:P21 ${sugu}.`
-            }
 
             SERVICE wikibase:label {
                 bd:serviceParam wikibase:language "en".
             }
         }
+        LIMIT 10
+    `;
+
+    vastus.innerHTML = "Ootan vastust...";
+
+    fetch("https://query.wikidata.org/sparql?query="
+        + encodeURIComponent(lause) + "&format=json")
+        .then(d => d.json())
+        .then(kuva)
+        .catch(error => {
+            console.log(error);
+            vastus.innerHTML = "Viga!";
+        });
+}
       LIMIT 15
 `;
           console.log(lause)
