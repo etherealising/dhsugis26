@@ -18,8 +18,8 @@
         }
         LIMIT 150
         `;
-        const embedURL ="https://query.wikidata.org/embed.html#"+encodeURIComponent(query);
-        document.getElementById("wikidatajoonis").src=embedURL;
+        window.addEventListener("DOMContentLoaded", function() {
+          document.getElementById("wikidatajoonis").src = embedURL; });
     </script>
   
   <title>K-pop Company Network</title>
