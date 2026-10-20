@@ -1,5 +1,32 @@
 <!doctype html>
 <html>
   <head>
+    <iframe
+      id="wikidatajoonis"
+      title="K-pop company network graph"
+      style="width:100%; height:75vh; min-height:550px; border:0"
+      loading="lazy"
+      allowfullscreen>
+    </iframe>
+    <script>
+      const query = `
+        #defaultView:Graph
+        SELECT ?artist ?artistLabel ?company ?companyLabel WHERE {
+          VALUES ?company {wd:Q483938 wd:Q483238 wd:Q50595 wd:Q16161254}
+        
+          {?artist wdt:P108 ?company.}
+          UNION # ühendab kahe või enama päringumustri tulemused ning tagastab vasted, mis vastavad emmale-kummale mustrile
+          {?artist wdt:P264 ?company.}
+        
+          ?artist wdt:P31 ?type.
+          VALUES ?type {wd:Q215380 wd:Q216337 wd:Q641066}
+        
+          SERVICE wikibase:label {bd:serviceParam wikibase:language "en".}
+        }
+        LIMIT 150
+        `;
+        const embedURL ="https://query.wikidata.org/sparql?format=json&query="+encodeURIComponent(query);
+        document.getElementById("joonis").src=embedURL;
+    </script>
   </head>
 </html>
