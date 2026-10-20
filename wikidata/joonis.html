@@ -1,13 +1,6 @@
 <!doctype html>
 <html>
   <head>
-    <iframe
-      id="wikidatajoonis"
-      title="K-pop company network graph"
-      style="width:100%; height:75vh; min-height:550px; border:0"
-      loading="lazy"
-      allowfullscreen>
-    </iframe>
     <script>
       const query = `
         #defaultView:Graph
@@ -28,7 +21,7 @@
         const embedURL ="https://query.wikidata.org/embed.html#"+encodeURIComponent(query);
         document.getElementById("wikidatajoonis").src=embedURL;
     </script>
-  </head>
+  
   <title>K-pop Company Network</title>
   <style>
     body {
@@ -89,13 +82,12 @@
       The graph may omit affiliations that are not recorded there.
     </p>
     <div class="graph">
-      <!-- Replace the iframe URL with your WDQS embed URL -->
       <iframe
-        src="https://w.wiki/e8wj"
-        title="Wikidata K-pop company network"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen>
+      id="wikidatajoonis"
+      title="K-pop company network graph"
+      style="width:100%; height:75vh; min-height:550px; border:0"
+      loading="lazy"
+      allowfullscreen>
       </iframe>
     </div>
     <p>
