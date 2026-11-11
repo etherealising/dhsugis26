@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Joonis</title>
+	<script>
+	  function joonista(){
+	    let g=tahvel.getContext("2d");
+		  g.beginPath();
+		  g.moveTo(10, 150);
+		  g.lineTo(50,100);
+		  g.lineTo(90, 150);
+	  	g.stroke();
+      
+      g.beginPath();
+      g.moveTo(10, 150);
+      g.lineTo(10, 200);
+      g.moveTo(90, 150);
+      g.lineTo(90, 200);
+      g.stroke();
+	  }
+	</script>
+  </head>
+  <body onload="joonista()">
+    <h1>Joonistamine</h1>
+	<canvas id="tahvel" width="400" height="300">
+	</canvas>
+  </body>
+</html>
