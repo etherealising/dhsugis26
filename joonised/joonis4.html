@@ -1,0 +1,98 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <title>Lumememmede joonistamine</title>
+    <script>
+      /**
+       * Funktsioon lumememme joonistamiseks lõuendile.
+       * @param {number} x - Alumise palli keskpunkti x-koordinaat
+       * @param {number} y - Alumise palli keskpunkti y-koordinaat
+       * @param {number} d - Alumise ringi läbimõõt
+       * @param {CanvasRenderingContext2D} [g] - 2D graafikakontekst (valikuline)
+       */
+      function joonistaLumememm(x, y, d, g) {
+        if (!g) {
+          g = document.getElementById("tahvel").getContext("2d");
+        }
+
+        // Raadiused proportsioonis alumise ringi läbimõõduga d
+        let r1 = d / 2;       // Alumise palli raadius
+        let r2 = r1 * 0.7;    // Keskmise palli raadius
+        let r3 = r1 * 0.5;    // Pea raadius
+
+        // Vertikaalsed keskpunktid (väikese katvusega, et pallid toetuksid loomulikult)
+        let y1 = y;
+        let y2 = y1 - r1 - r2 * 0.85;
+        let y3 = y2 - r2 - r3 * 0.85;
+
+        // 1. Alumine pall (suur)
+        g.beginPath();
+        g.arc(x, y1, r1, 0, 2 * Math.PI);
+        g.stroke();
+
+        // 2. Keskmine pall
+        g.beginPath();
+        g.arc(x, y2, r2, 0, 2 * Math.PI);
+        g.stroke();
+
+        // 3. Ülemine pall (pea)
+        g.beginPath();
+        g.arc(x, y3, r3, 0, 2 * Math.PI);
+        g.stroke();
+
+        // 4. Silmad
+        let eyeRadius = Math.max(1.5, r3 * 0.12);
+        let eyeOffsetX = r3 * 0.35;
+        let eyeOffsetY = r3 * 0.2;
+
+        g.fillStyle = "black";
+
+        // Vasak silm
+        g.beginPath();
+        g.arc(x - eyeOffsetX, y3 - eyeOffsetY, eyeRadius, 0, 2 * Math.PI);
+        g.fill();
+
+        // Parem silm
+        g.beginPath();
+        g.arc(x + eyeOffsetX, y3 - eyeOffsetY, eyeRadius, 0, 2 * Math.PI);
+        g.fill();
+
+        // 5. Nina (porgand)
+        g.fillStyle = "orange";
+        g.beginPath();
+        g.moveTo(x, y3);
+        g.lineTo(x + r3 * 0.7, y3 + r3 * 0.12);
+        g.lineTo(x, y3 + r3 * 0.24);
+        g.closePath();
+        g.fill();
+      }
+
+      // Sünonüüm lühema funktsiooninime jaoks
+      const lumememm = joonistaLumememm;
+
+      // Demo kahe lumememme joonistamiseks
+      function joonista() {
+        let g = document.getElementById("tahvel").getContext("2d");
+        g.clearRect(0, 0, 400, 300);
+
+        // Esimene lumememm (suurem): x=130, y=220, läbimõõt d=90
+        joonistaLumememm(130, 220, 90, g);
+
+        // Teine lumememm (väiksem): x=270, y=235, läbimõõt d=60
+        joonistaLumememm(270, 235, 60, g);
+		
+		// Kolmas lumememm (väiksem): x=270, y=235, läbimõõt d=40
+        joonistaLumememm(380, 235, 40, g);
+		
+		// Neljas lumememm (väiksem): x=270, y=235, läbimõõt d=20
+        joonistaLumememm(200, 235, 20, g);
+      }
+    </script>
+  </head>
+  <body onload="joonista()">
+    <h1>Kahe lumememme demo</h1>
+    <p>Lumememmed on joonistatud funktsiooni <code>joonistaLumememm(x, y, d)</code> abil.</p>
+    <canvas id="tahvel" width="400" height="300" style="border: 1px solid #ccc;">
+    </canvas>
+  </body>
+</html>

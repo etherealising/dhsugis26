@@ -1,0 +1,52 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <title>Lumememm</title>
+    <script>
+      function joonista(){
+        let g = tahvel.getContext("2d");
+
+        // 1. Alumine pall (suur)
+        g.beginPath();
+        g.arc(200, 220, 50, 0, 2 * Math.PI);
+        g.stroke();
+
+        // 2. Keskmine pall
+        g.beginPath();
+        g.arc(200, 140, 35, 0, 2 * Math.PI);
+        g.stroke();
+
+        // 3. Ülemine pall (pea)
+        g.beginPath();
+        g.arc(200, 80, 25, 0, 2 * Math.PI);
+        g.stroke();
+
+        // 4. Silmad
+        g.fillStyle = "black";
+
+        // Vasak silm
+        g.beginPath();
+        g.arc(192, 75, 3, 0, 2 * Math.PI);
+        g.fill();
+
+        // Parem silm
+        g.beginPath();
+        g.arc(208, 75, 3, 0, 2 * Math.PI);
+        g.fill();
+
+        // Nina (porgand)
+        g.fillStyle = "orange";
+        g.beginPath();
+        g.moveTo(200, 80);
+        g.lineTo(218, 83);
+        g.lineTo(200, 86);
+        g.fill();
+      }
+    </script>
+  </head>
+  <body onload="joonista()">
+    <h1>Lumememm</h1>
+    <canvas id="tahvel" width="400" height="300" style="border: 1px solid #ccc;">
+    </canvas>
+  </body>
+</html>
